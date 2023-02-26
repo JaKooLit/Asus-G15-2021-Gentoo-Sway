@@ -1,34 +1,27 @@
-
 # Read `man 5 sway` for a complete reference.
 
-### Variables
+##█░█ ▄▀█ █▀█ █ ▄▀█ █▄▄ █░░ █▀▀ █▀
+##▀▄▀ █▀█ █▀▄ █ █▀█ █▄█ █▄▄ ██▄ ▄█
 
 # Logo key. Use Mod1 for Alt.
 set $mod Mod4
-set $wallpapers_path $HOME/Pictures/wallpapers/forest.jpg
-
-# Your preferred terminal emulator
 set $term kitty
-
-# Your preferred application launcher
-# Note: pass the final command to swaymsg so that the resulting window can be opened
-# on the original workspace that the command was run on.
-#set $menu dmenu_path | dmenu | xargs swaymsg exec --
-
 set $menu wofi --show run
+set $wallpapers_path $HOME/Pictures/wallpapers/
+
 #set $menu mounch -p
 #bindsym $mod+d exec
-
-# Start your launcher
-bindsym $mod+d exec $menu|xargs swaymsg exec --
-
 # Home row direction keys, like vim
 set $left h
 set $down j
 set $up k
 set $right l
 
-# Workspaces
+set $bg #000000
+set $br #1F51FF
+set $brbug #FF0000
+set $textColor #cbccc6
+
 set $ws1 "1 "
 set $ws2 "2 "
 set $ws3 "3 "
@@ -40,92 +33,20 @@ set $ws8 "8 "
 set $ws9 "9 "
 set $ws10 "10"
 
-set $bg #000000
-set $br #1F51FF
-set $brbug #FF0000
-set $textColor #cbccc6
+# Your preferred application launcher
+# Note: pass the final command to swaymsg so that the resulting window can be opened
+# on the original workspace that the command was run on.
+#set $menu dmenu_path | dmenu | xargs swaymsg exec --
 
-# class		border  backgr. text		indicator	child_border
-client.focused	$br     $br     $textColor	$brbug		$br
+##█▄▀ █▀▀ █▄█ █▄▄ █ █▄░█ █▀▄ █▀
+##█░█ ██▄ ░█░ █▄█ █ █░▀█ █▄▀ ▄█
 
-#output configurations
-# You can get the names of your outputs by running: swaymsg -t get_outputs
-
-#output eDP-1 scale 1.25
-#output eDP-1 mode 2560x1440@165.003Hz position 0,0 adaptive_sync on
-output DP-3 mode 2560x1440 position 0,0 adaptive_sync on
-#output HDMI-A-1 mode 2560x1440 position 0,0 adaptive_sync on 
-output HDMI-A-1 mode 2560x1440 pos 0,0 adaptive_sync on
-
-#wallpaper
-#output * bg /home/ja/Pictures/wallpaper/emerge.png fill
-output * bg $(find $wallpapers_path -type f | shuf -n 1) fill
-
-#way-displays 
-#exec way-displays > /tmp/way-displays.${XDG_VTNR}.${USER}.log 2>&1
-
-#windows borders
-
-gaps inner 10
-gaps outer 8
-#smart_gaps on
-default_border pixel 2
-default_floating_border normal
-hide_edge_borders smart
-#smart_borders on
-focus_follows_mouse no
-floating_modifier $mod normal
-font CascadiaCodePLSemiBoldItalic 10
-# 
-#font
-#font pango: CascadiaCodePLSemiBoldItalic 11
-
-
-
-##Idle configuration
-#
-# Example configuration:
-#
-# exec swayidle -w \
-#          timeout 300 'swaylock -f -c 000000' \
-#          timeout 600 'swaymsg "output * dpms off"' resume 'swaymsg "output * dpms on"' \
-#          before-sleep 'swaylock -f -c 000000'
-#
-# This will lock your screen after 300 seconds of inactivity, then turn off
-# your displays after another 300 seconds, and turn your screens back on when
-# resumed. It will also lock your screen before your computer goes to sleep.
-
-### Input configuration
-#
-# Example configuration:
-#
-#   input "2:14:SynPS/2_Synaptics_TouchPad" {
-#       dwt enabled
-#       tap enabled
-#       natural_scroll enabled
-#       middle_emulation enabled
-#   }
-#
-# You can get the names of your inputs by running: swaymsg -t get_inputs
-# Read `man 5 sway-input` for more information about this section.
-
-input * {
-    xkb_layout us
-}
-#  _  _________   ______ ___ _   _ ____ ___ _   _  ____ ____  
-# | |/ / ____\ \ / / __ )_ _| \ | |  _ \_ _| \ | |/ ___/ ___| 
-# | ' /|  _|  \ V /|  _ \| ||  \| | | | | ||  \| | |  _\___ \ 
-# | . \| |___  | | | |_) | || |\  | |_| | || |\  | |_| |___) |
-# |_|\_\_____| |_| |____/___|_| \_|____/___|_| \_|\____|____/ 
-#  
-#
-# Basics:
-#
-# Start a terminal
 bindsym $mod+Return exec $term
 
 # Kill focused window
 bindsym $mod+Shift+q kill
+# Start your launcher
+bindsym $mod+d exec $menu|xargs swaymsg exec --
 
 # Drag floating windows by holding down $mod and left mouse button.
 # Resize them with right mouse button + $mod.
@@ -164,8 +85,92 @@ bindsym $mod+Shift+Left move left
 bindsym $mod+Shift+Down move down
 bindsym $mod+Shift+Up move up
 bindsym $mod+Shift+Right move right
+
+
+
+# class		border  backgr. text		indicator	child_border
+client.focused	$br     $br     $textColor	$brbug		$br
+
+## OUTPUTS
+#output configurations
+# You can get the names of your outputs by running: swaymsg -t get_outputs
+
+##█▀▄▀█ █▀█ █▄░█ █ ▀█▀ █▀█ █▀█ █▀
+##█░▀░█ █▄█ █░▀█ █ ░█░ █▄█ █▀▄ ▄█
+#output eDP-1 scale 1.25
+output eDP-1 mode 2560x1440@165.003Hz position 0,0 adaptive_sync on
+
+### outputs in usb-c
+output DP-1 mode 2560x1440 adaptive_sync on
+output DP-1 mode 2560x1440 adaptive_sync on
+#output DP-3 mode 2560x1440 position 0,0 adaptive_sync on
+output HDMI-A-1 mode 2560x1440 adaptive_sync on 
+#output HDMI-A-1 mode 2560x1440 pos 0,0 adaptive_sync on
+
+bindswitch lid:on output eDP-1 disable
+bindswitch lid:off output eDP-1 enable
+
+##█░█░█ ▄▀█ █░░ █░░ █▀█ ▄▀█ █▀█ █▀▀ █▀█
+##▀▄▀▄▀ █▀█ █▄▄ █▄▄ █▀▀ █▀█ █▀▀ ██▄ █▀▄
+#output * bg /home/ja/Pictures/wallpaper/emerge.png fill
+output * bg $(find $wallpapers_path -type f | shuf -n 1) fill
+
+
+#windows borders
+gaps inner 10
+gaps outer 8
+#smart_gaps on
+default_border pixel 2
+default_floating_border normal
+hide_edge_borders smart
+#smart_borders on
+focus_follows_mouse no
+floating_modifier $mod normal
+font CascadiaCodePLSemiBoldItalic 12
+# 
+#font
+#font pango: CascadiaCodePLSemiBoldItalic 11
+
+##Idle configuration
 #
-# Workspaces:
+# Example configuration:
+#
+# exec swayidle -w \
+#          timeout 300 'swaylock -f -c 000000' \
+#          timeout 600 'swaymsg "output * dpms off"' resume 'swaymsg "output * dpms on"' \
+#          before-sleep 'swaylock -f -c 000000'
+#
+# This will lock your screen after 300 seconds of inactivity, then turn off
+# your displays after another 300 seconds, and turn your screens back on when
+# resumed. It will also lock your screen before your computer goes to sleep.
+
+### Input configuration
+#
+# Example configuration:
+#
+#   input "2:14:SynPS/2_Synaptics_TouchPad" {
+#       dwt enabled
+#       tap enabled
+#       natural_scroll enabled
+#       middle_emulation enabled
+#   }
+#
+##█ █▄░█ █▀█ █░█ ▀█▀ █▀
+##█ █░▀█ █▀▀ █▄█ ░█░ ▄█
+# You can get the names of your inputs by running: swaymsg -t get_inputs
+# Read `man 5 sway-input` for more information about this section.
+
+input * {
+    xkb_layout us
+}
+
+input type:touchpad {
+    tap enabled
+    natural_scroll enabled
+}
+
+##█░█░█ █▀█ █▀█ █▄▀ █▀ █▀█ ▄▀█ █▀▀ █▀▀ █▀
+##▀▄▀▄▀ █▄█ █▀▄ █░█ ▄█ █▀▀ █▀█ █▄▄ ██▄ ▄█
 #
 bindsym $mod+1 workspace number $ws1
 bindsym $mod+2 workspace number $ws2
@@ -191,7 +196,8 @@ bindsym $mod+Shift+9 move container to workspace number $ws9
 bindsym $mod+Shift+0 move container to workspace number $ws10
 
 
-# Layout stuff:
+##█░░ ▄▀█ █▄█ █▀█ █░█ ▀█▀ █▀
+##█▄▄ █▀█ ░█░ █▄█ █▄█ ░█░ ▄█
 #
 #You can "split" the current object of your focus with
 #$mod+h or $mod+v, for horizontal and vertical splits
@@ -229,38 +235,38 @@ bindsym $mod+grave workspace back_and_forth
 #
 # Sway has a "scratchpad", which is a bag of holding for windows.
 # You can send windows there and get them back later.
-
 # Move the currently focused window to the scratchpad
 bindsym $mod+Shift+minus move scratchpad
-
 # Show the next scratchpad window or hide the focused scratchpad window.
 # If there are multiple scratchpad windows, this command cycles through them.
 bindsym $mod+minus scratchpad show
 
-
-
+##█░█ █▀█ ▀█▀ █▄▀ █▀▀ █▄█ █▀
+##█▀█ █▄█ ░█░ █░█ ██▄ ░█░ ▄█
 # Bind media keys on a keyboard to control volume and playback (using wireplumber and pipewire
 bindsym XF86AudioRaiseVolume exec wpctl set-volume @DEFAULT_AUDIO_SINK@ 2%+
 bindsym XF86AudioLowerVolume exec wpctl set-volume @DEFAULT_AUDIO_SINK@ 2%-
 bindsym XF86AudioMute exec wpctl set-mute @DEFAULT_SINK@ toggle
 bindsym Control+XF86AudioMute exec wpctl set-mute @DEFAULT_SOURCE@ toggle
 
+#bindsym XF86AudioPlay exec playerctl play-pause
+#bindsym XF86AudioNext exec playerctl next
+#bindsym XF86AudioPrev exec playerctl previous
 
+bindsym XF86MonBrightnessDown exec brightnessctl set 5%-
+bindsym XF86MonBrightnessUp exec brightnessctl set 5%+
 
+##keyboard brightness ###
+#bindsym XF86TouchpadToggle input type:touchpad events toggle enabled disabled
 
-bindsym XF86AudioPlay exec playerctl play-pause
-bindsym XF86AudioNext exec playerctl next
-bindsym XF86AudioPrev exec playerctl previous
-
-#bindsym XF86MonBrightnessUp exec brightnessctl s 200+
-#bindsym XF86MonBrightnessDown exect brightnessctl s 200-
-
+##█▀ █▀▀ █▀█ █▀▀ █▀▀ █▄░█ █▀ █░█ █▀█ ▀█▀
+##▄█ █▄▄ █▀▄ ██▄ ██▄ █░▀█ ▄█ █▀█ █▄█ ░█░
 #screenshot with slurp
 # Take a screenshot with all output and save it into screenshots
-bindsym $mod+Print exec grim -t jpeg ~/Pictures/sway_screenshots/$(date +%Y-%m-%d_%H-%m-%s).jpg
+bindsym $mod+F6 exec grim -t jpeg ~/Pictures/sway_screenshots/$(date +%Y-%m-%d_%H-%m-%s).jpg
 
 # Take a Screenshot with the region select
-bindsym $mod+Shift+Print exec grim -t jpeg -g "$(slurp)" ~/Pictures/sway_screenshots/$(date +%Y-%m-%d_%H-%m-%s).jpg
+bindsym $mod+Shift+F6 exec grim -t jpeg -g "$(slurp)" ~/Pictures/sway_screenshots/$(date +%Y-%m-%d_%H-%m-%s).jpg
 
 # Resizing containers:
 #
@@ -287,41 +293,31 @@ bindsym Escape mode "default"
 bindsym $mod+r mode "resize"
 }
 
-#     _    ____  ____  _     ___ ____    _  _____ ___ ___  _   _ ____  
-#    / \  |  _ \|  _ \| |   |_ _/ ___|  / \|_   _|_ _/ _ \| \ | / ___| 
-#   / _ \ | |_) | |_) | |    | | |     / _ \ | |  | | | | |  \| \___ \ 
-#  / ___ \|  __/|  __/| |___ | | |___ / ___ \| |  | | |_| | |\  |___) |
-# /_/   \_\_|   |_|   |_____|___\____/_/   \_\_| |___\___/|_| \_|____/ 
-# 
+##▄▀█ █▀█ █▀█ █░░ █ █▀▀ ▄▀█ ▀█▀ █ █▀█ █▄░█ █▀
+##█▀█ █▀▀ █▀▀ █▄▄ █ █▄▄ █▀█ ░█░ █ █▄█ █░▀█ ▄█
 
-# Default settings for some applications
-for_window [class="mpv"] floating enable
-for_window [class="mpv"] move absolute center
-
+for_window [class="vlc"] floating enable
+for_window [class="vlc"] move absolute center
+for_window [class="sway-img"] floating enable
+for_window [class="sway-img"] move absolute center
 #for_window [class="MuPDF"] floating enable
 #for_window [app_id="pavucontrol"] floating enable
 #for_window [app_id="blueman-manager"] floating enable
-
 for_window [class = "kitty"] floating enable
-
 for_window [title="Picture-in-Picture"] {
   sticky enable
   move position 78ppt 65ppt
 }
-
 for_window [class="sway-img"] {
   floating enable
   move absolute center
   resize set 1200 800
 }
-
 #waybar
 bar {
 	swaybar_command waybar
 	strip_workspace_numbers yes
 }
-
-
 assign [app_id="firefox"] → $ws2
 assign [app_id="microsoft-edge-stable"] → $ws2
 assign [class="microsoft-edge-stable"] → $ws2
@@ -335,48 +331,38 @@ assign [app_id="virt-manager"] → $ws6
 assign [app_id="audacious"] → $ws9
 assign [app_id="easyeffects"] → $ws9
 
-
-
-#### THEMES ####
+##▀▀█▀▀ █░░█ █▀▀ █▀▄▀█ █▀▀ █▀▀ 
+##░░█░░ █▀▀█ █▀▀ █░▀░█ █▀▀ ▀▀█ 
+##░░▀░░ ▀░░▀ ▀▀▀ ▀░░░▀ ▀▀▀ ▀▀▀
 
 set $gnome-schema org.gnome.desktop.interface
 exec_always {
-    gsettings set $gnome-schema gtk-theme 'Nordic-standard-buttons'
+    gsettings set $gnome-schema gtk-theme 'Nordic-standard-buttons-v40'
     gsettings set $gnome-schema icon-theme 'Shiny-Dark-Icons'
     //gsettings set $gnome-schema cursor-theme 'cursor theme name'
     gsettings set $gnome-schema font-name 'Cascadia Code Italic 11'
 }
 
-#     _   _   _ _____ ___  ____ _____  _    ____ _____ 
-#    / \ | | | |_   _/ _ \/ ___|_   _|/ \  |  _ \_   _|
-#   / _ \| | | | | || | | \___ \ | | / _ \ | |_) || |  
-#  / ___ \ |_| | | || |_| |___) || |/ ___ \|  _ < | |  
-# /_/   \_\___/  |_| \___/|____/ |_/_/   \_\_| \_\|_|  
-#
-
+##█▀▀█ █░░█ ▀▀█▀▀ █▀▀█ █▀▀ ▀▀█▀▀ █▀▀█ █▀▀█ ▀▀█▀▀ 
+##█▄▄█ █░░█ ░░█░░ █░░█ ▀▀█ ░░█░░ █▄▄█ █▄▄▀ ░░█░░ 
+##▀░░▀ ░▀▀▀ ░░▀░░ ▀▀▀▀ ▀▀▀ ░░▀░░ ▀░░▀ ▀░▀▀ ░░▀░░ 
+#way-displays 
+#exec way-displays > /tmp/way-displays.${XDG_VTNR}.${USER}.log 2>&1
+exec dbus-update-activation-environment WAYLAND_DISPLAY XDG_CURRENT_DESKTOP=sway
 #xdg-desktop-portal-wlr for screen sharing
 exec --no-startup-id dbus-update-activation-environment --all
-
 #polkit
 exec /usr/libexec/polkit-gnome-authentication-agent-1
-
-exec mako
-
-exec easyeffects --gapplication-service -l my_own
-
-
+exec mako &
+exec blueman-applet &
+exec_always ~/.config/autostart/apparmor-notify.desktop
+exec rog-control-center
 #autotiling
 exec_always autotiling
-
 #pipewire
 exec gentoo-pipewire-launcher
 exec --nostartup-id /usr/libexec/xdg-desktop-portal-wlr -r
-
-
-exec dbus-update-activation-environment WAYLAND_DISPLAY XDG_CURRENT_DESKTOP=sway
-
-include colorscheme 
-xwayland enable
-
+#include colorscheme 
+#xwayland enable
 
 #include /etc/sway/config
