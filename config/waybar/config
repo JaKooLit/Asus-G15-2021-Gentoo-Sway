@@ -2,14 +2,14 @@
 
    "layer": "top", // Waybar at top layer
     "position": "bottom", // Waybar position (top|bottom|left|right)
-    //"height": 30, // Waybar height (to be removed for auto height)
-    //"width": 840, // Waybar width
+    "height": 50, // Waybar height (to be removed for auto height)
+    //"width": 2500, // Waybar width
     "spacing": 4, // Gaps between modules (4px)
     
       // Choose the order of the modules
      "modules-left": ["sway/workspaces","sway/mode"],
      "modules-center": ["sway/window", "idle_inhibitor", "clock#time", "clock#date", "custom/weather"],
-     "modules-right": ["tray", "cpu", "memory", "network", "network#2", "custom/scratchpad-indicator", "temperature", "custom/storage", "pulseaudio", "custom/power", "custom/menu"],
+     "modules-right": ["tray", "cpu", "memory", "network", "custom/scratchpad-indicator", "temperature", "custom/storage", "pulseaudio", "battery", "custom/power", "custom/menu"],
    
 
      "sway/mode": {
@@ -34,21 +34,12 @@
     },
 
     "network": {
-        "interface": "enp5s0",
+        "interface": "enp3s0",
         "format-wifi": "{essid} ({signalStrength}%) ",
         "format-ethernet": " {ifname}   {bandwidthUpBits}  {bandwidthDownBits} ",
         "format-disconnected": "", 
         "max-length": 50,
         "on-click": "kitty -e 'nmtui'"
-    },
-
-    "network#2": {
-    "interface": "enp6s0",
-    "format": "{ifname}",
-    "format-ethernet": " {ifname}   {bandwidthUpBits}  {bandwidthDownBits} ",
-    "format-disconnected": "",
-    "max-length": 50
-
 
     },
 
@@ -60,8 +51,8 @@
         }
     },
     "tray": {
-        "icon-size": 15,
-        "spacing": 10
+        "icon-size": 20,
+        "spacing": 12
 
         },
     
@@ -106,25 +97,25 @@
         "exec-if": "ping wttr.in -c1"
     },
     "temperature": {
-        "hwmon-path": "/sys/class/hwmon/hwmon4/temp2_input",
-        "critical-threshold": 82,
+        "hwmon-path": "/sys/class/hwmon/hwmon1/temp1_input",
+        "critical-threshold": 95,
         "format-critical": "{temperatureC}°C {icon}",
         "format": "{temperatureC}°C {icon}",
         "format-icons": [""]
     },
-    //"battery": {
-     //   "states": {
-     //       // "good": 95,
-     //       "warning": 20,
-     //       "critical": 10
-     //   },
-     //   "format": "{capacity}% {icon}",
-     //   "format-charging": "{capacity}% ",
-     //   "format-plugged": "{capacity}% ",
-     //   "format-alt": "{time} {icon}",
-     //   "format-full": "",
-      //  "format-icons": ["", "", "", "", ""]
-     //},
+    "battery": {
+	"states": {
+		"good": 95,
+		"warning": 20,
+		"critical": 10
+	},
+	"format": "{capacity}% {icon}",
+	"format-charging": "{capacity}% ",
+	"format-plugged": "{capacity}% ",
+	"format-alt": "{time} {icon}",
+	"format-full": "",
+	"format-icons": ["", "", "", "", ""]
+     },
  
     
 	"custom/power": {
@@ -148,7 +139,7 @@
     "interval": "once",
     "format-icons": {
         "mute": "",
-        "default": ["", "🔈", "X", "🔊"],
+        "default": ["", "🔈", "", "🔊"],
      },
 
     "exec": "pw-volume status"
@@ -157,9 +148,9 @@
       "pulseaudio": {
        "scroll-step": 1, // %, can be a float
         "format": " {volume}% {icon} ",
-        "format-muted": "🔇 {format_source}",
+        "format-muted": "婢 {format_source}",
 	"format-bluetooth": "{icon} {volume}% {format_source}",
-	"format-bluetooth-muted": "🔇 {format_source}",
+	"format-bluetooth-muted": " {icon} {format_source}",
         "format-muted": "0% {icon} ",
         "format-source": "{volume}% ",
         "format-source-muted": "",
@@ -170,8 +161,8 @@
             "phone": "",
             "portable": "",
             "car": "",
-	"default": ["🔈","", "🔊"]
-	// "default": ["🔈", ", "🔊"]
+	"default": ["🔈", "墳", "🔊"]
+	//    "default": ["🔈", "", ""]  "🔈", "", "🔊"]
        
        },
 
