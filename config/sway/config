@@ -261,6 +261,9 @@ bindsym XF86MonBrightnessUp exec brightnessctl set 5%+
 ##keyboard brightness ###
 #bindsym XF86TouchpadToggle input type:touchpad events toggle enabled disabled
 
+##toggle airplane mode Fn+F12 key
+bindsym XF86Rfkill exec ~/.config/sway/airplane-mode.sh
+
 ##█▀ █▀▀ █▀█ █▀▀ █▀▀ █▄░█ █▀ █░█ █▀█ ▀█▀
 ##▄█ █▄▄ █▀▄ ██▄ ██▄ █░▀█ ▄█ █▀█ █▄█ ░█░
 #screenshot with slurp
