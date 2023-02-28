@@ -8,8 +8,8 @@
     
       // Choose the order of the modules
      "modules-left": ["sway/workspaces","sway/mode"],
-     "modules-center": ["sway/window", "idle_inhibitor", "clock", "custom/weather"],
-     "modules-right": ["tray", "cpu", "memory", "custom/scratchpad-indicator", "temperature", "custom/storage", "pulseaudio", "battery", "custom/power", "custom/menu"],
+     "modules-center": ["sway/window", "idle_inhibitor", "clock#time", "clock#date", "custom/weather"],
+     "modules-right": ["tray", "cpu", "memory", "network", "custom/scratchpad-indicator", "temperature", "custom/storage", "pulseaudio", "battery", "custom/power", "custom/menu"],
    
 
      "sway/mode": {
@@ -33,19 +33,20 @@
         }
     },
 
-//	"network": {
-//	exec --no-startup-id 'nm-applet --indicator'       
-//"interface": "enp3s0",
-//        "format-wifi": "{essid} ({signalStrength}%) ",
-//        "format-ethernet": " {ifname}   {bandwidthUpBits}  {bandwidthDownBits} ",
-//	"tooltip-format": "{ifname} via {gwaddr} ",
-//	"tooltip-format-wifi": "{essid} ({signalStrength}%) ",
-//	"tooltip-format-ethernet": "{ifname} ",
-//	"tooltip-format-disconnected": "Disconnected",
-//      "format-disconnected": "", 
-//        "max-length": 50,
-//        "on-click": "foot -e 'nmtui'"
-//    },
+    "network": {
+        //"interface": "enp3s0",
+        "format-wifi": "{essid} ({signalStrength}%) ",
+        "format-ethernet": " {ifname}   {bandwidthUpBits}  {bandwidthDownBits} ",
+	"tooltip-format": "{ifname} via {gwaddr} ",
+	"tooltip-format-wifi": "{essid} ({signalStrength}%) ",
+	"tooltip-format-ethernet": "{ifname} ",
+	"tooltip-format-disconnected": "Disconnected",
+        "format-disconnected": "", 
+        "max-length": 50,
+        "on-click": "foot -e 'nmtui'"
+
+    },
+
     "idle_inhibitor": {
         "format": "{icon}",
         "format-icons": {
@@ -58,24 +59,24 @@
         "spacing": 12
 
     },
+    
     "clock": {
-        "format": "{:%H:%M}  ",
-        "format-alt": "{:%A, %B %d, %Y (%R)}  ",
-        "tooltip-format": "<tt><big>{calendar}</big></tt>",
-        "calendar": {
-                    "mode"          : "year",
-                    "mode-mon-col"  : 3,
-                    "weeks-pos"     : "right",
-                    "on-scroll"     : 1,
-                    "on-click-right": "mode",
-                    "format": {
-                              "months":     "<span color='#ffead3'><b>{}</b></span>",
-                              "days":       "<span color='#ecc6d9'><b>{}</b></span>",
-                              "weeks":      "<span color='#99ffdd'><b>W{}</b></span>",
-                              "weekdays":   "<span color='#ffcc66'><b>{}</b></span>",
-                              "today":      "<span color='#ff6699'><b><u>{}</u></b></span>"
-                              }
-                    }
+	"tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
+        "format-alt": "{:%Y-%m-%d}"
+    },
+    //"on-click-right": "exec coretime"
+    //},
+    
+    "clock#time": {
+        "interval": 1,
+        "format": "{:%H:%M:%S}",
+        "tooltip": false
+    },
+
+    "clock#date": {
+      "interval": 10,
+      "format": "  {:%e %b %Y}", // Icon: calendar-alt
+      "tooltip-format": "{:%e %B %Y}"
     },
 
     "cpu": {

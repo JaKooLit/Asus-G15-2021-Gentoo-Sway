@@ -1,7 +1,7 @@
 * {
     border: none;
-    font-family: "Cascadia Mono";
-    font-size: 18px;
+    font-family: "Cascadia Mono PL Semibold Italic, Font Awesome";
+    font-size: 16px;
     color: #ffffff;
     border-radius: 30px;
 }
@@ -12,7 +12,7 @@ window#waybar {
 window > box {
 	margin: 1px 50px 8px;
     background: rgba(0, 0, 0, 0);
-    border-bottom: 1px solid rgba(0, 0, 0, 0);
+    border-bottom: 3px solid rgba(0, 0, 0, 0);
     color: white;
 }
 window {
