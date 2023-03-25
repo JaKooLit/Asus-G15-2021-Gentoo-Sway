@@ -77,7 +77,7 @@ bindsym xf86Launch3 exec asusctl led-mode -n #FN+F4 Switch keyboard RGB profile
 bindsym xf86Launch4 exec asusctl profile -n  #FN+F5 change of fan profiles (Quite, Balance Performance)
 bindsym xf86MonBrightnessDown exec "~/.config/sway/exec/brightness --dec"
 bindsym xf86MonBrightnessUp exec "~/.config/sway/exec/brightness --inc"
-bindsym xf86TouchpadToggle input type:touchpad events toggle enabled disabled
+bindsym xf86TouchpadToggle exec swaymsg input type:touchpad events toggle enabled disabled && notify-send 'Touchpad' 'Enabled / Disabled'
 bindsym xf86Sleep exec~/.config/sway/exec/lockscreen #FN+F11 (sleep button) #for swaylock
 bindsym xf86Rfkill exec ~/.config/sway/exec/airplane-mode.sh #FN+F12
 
