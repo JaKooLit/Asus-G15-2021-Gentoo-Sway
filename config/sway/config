@@ -75,9 +75,9 @@ bindsym xf86KbdBrightnessDown exec brightnessctl -d asus::kbd_backlight set 33%-
 bindsym xf86KbdBrightnessUp exec brightnessctl -d asus::kbd_backlight set 33%+ #FN+F3 Keyboard brightnes up
 bindsym xf86Launch3 exec asusctl led-mode -n #FN+F4 Switch keyboard RGB profile
 bindsym xf86Launch4 exec asusctl profile -n  #FN+F5 change of fan profiles (Quite, Balance Performance)
-bindsym xf86MonBrightnessDown exec "~/.config/sway/exec/brightness --dec" #FN+F7
-bindsym xf86MonBrightnessUp exec "~/.config/sway/exec/brightness --inc" #FN+F8
-bindsym xf86TouchpadToggle input type:touchpad events toggle enabled disabled #FN+F10
+bindsym xf86MonBrightnessDown exec "~/.config/sway/exec/brightness --dec"
+bindsym xf86MonBrightnessUp exec "~/.config/sway/exec/brightness --inc"
+bindsym xf86TouchpadToggle input type:touchpad events toggle enabled disabled
 bindsym xf86Sleep exec~/.config/sway/exec/lockscreen #FN+F11 (sleep button) #for swaylock
 bindsym xf86Rfkill exec ~/.config/sway/exec/airplane-mode.sh #FN+F12
 
