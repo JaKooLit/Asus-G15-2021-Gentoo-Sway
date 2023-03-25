@@ -6,11 +6,12 @@
 # Logo key. Use Mod1 for Alt.
 set $mod Mod4
 set $term foot
-set $menu wofi --show run
+set $menu wofi --show drun -I
 set $wallpapers_path $HOME/Pictures/wallpapers/
 
 #set $menu mounch -p
 #bindsym $mod+d exec
+
 # Home row direction keys, like vim
 set $left h
 set $down j
@@ -30,7 +31,7 @@ set $ws5 "5 "
 set $ws6 "6 "
 set $ws7 "7 "
 set $ws8 "8 "
-set $ws9 "9 "
+set $ws9 "9 "
 set $ws10 "10"
 
 # Your preferred application launcher
@@ -43,7 +44,7 @@ set $ws10 "10"
 
 bindsym $mod+t exec thunar
 bindsym $mod+Return exec $term
-bindsym $mod+alt+f11 exec swaylock
+
 # Kill focused window
 bindsym $mod+Shift+q kill
 # Start your launcher
@@ -60,6 +61,30 @@ bindsym $mod+Shift+c reload
 
 # Exit sway (logs you out of your Wayland session)
 bindsym $mod+Shift+e exec swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your Wayland session.' -B 'Yes, exit sway' 'swaymsg exit'
+
+##█░█ █▀█ ▀█▀ █▄▀ █▀▀ █▄█ █▀
+##█▀█ █▄█ ░█░ █░█ ██▄ ░█░ ▄█
+# Bind media keys on a keyboard to control volume and playback (using wireplumber and pipewire)
+# NOTE asusctl to be installed for some hotkeys
+bindsym xf86AudioRaiseVolume exec "~/.config/waybar/scripts/volume --inc"
+bindsym xf86AudioLowerVolume exec "~/.config/waybar/scripts/volume --dec"
+bindsym xf86AudioMicMute exec pactl set-source-mute @DEFAULT_SOURCE@ toggle
+bindsym xf86Launch1 exec rog-control-center # ASUS Armory crate button
+bindsym xf86AudioMute exec wpctl set-mute @DEFAULT_SINK@ toggle #FN+F1
+bindsym xf86KbdBrightnessDown exec brightnessctl -d asus::kbd_backlight set 33%- #FN+F2 Keyboard brightness down
+bindsym xf86KbdBrightnessUp exec brightnessctl -d asus::kbd_backlight set 33%+ #FN+F3 Keyboard brightnes up
+bindsym xf86Launch3 exec asusctl led-mode -n #FN+F4 Switch keyboard RGB profile
+bindsym xf86Launch4 exec asusctl profile -n  #FN+F5 change of fan profiles (Quite, Balance Performance)
+bindsym xf86MonBrightnessDown exec "~/.config/sway/exec/brightness --dec" #FN+F7
+bindsym xf86MonBrightnessUp exec "~/.config/sway/exec/brightness --inc" #FN+F8
+bindsym xf86TouchpadToggle input type:touchpad events toggle enabled disabled #FN+F10
+bindsym xf86Sleep exec~/.config/sway/exec/lockscreen #FN+F11 (sleep button) #for swaylock
+bindsym xf86Rfkill exec ~/.config/sway/exec/airplane-mode.sh #FN+F12
+
+# uncomment for other systems
+#bindsym xf86AudioPlay exec playerctl play-pause
+#bindsym xf86AudioNext exec playerctl next
+#bindsym xf86AudioPrev exec playerctl previous
 
 # Moving around:
 
@@ -99,10 +124,10 @@ client.focused	$br     $br     $textColor	$brbug		$br
 ##█▀▄▀█ █▀█ █▄░█ █ ▀█▀ █▀█ █▀█ █▀
 ##█░▀░█ █▄█ █░▀█ █ ░█░ █▄█ █▀▄ ▄█
 #output eDP-1 scale 1.25
+
 output eDP-1 mode 2560x1440@165.003Hz position 0,0 adaptive_sync on
 
 ### outputs in usb-c
-output DP-1 mode 2560x1440 adaptive_sync on
 output DP-1 mode 2560x1440 adaptive_sync on
 #output DP-3 mode 2560x1440 position 0,0 adaptive_sync on
 output HDMI-A-1 mode 2560x1440 adaptive_sync on 
@@ -114,13 +139,13 @@ bindswitch lid:off output eDP-1 enable
 ##█░█░█ ▄▀█ █░░ █░░ █▀█ ▄▀█ █▀█ █▀▀ █▀█
 ##▀▄▀▄▀ █▀█ █▄▄ █▄▄ █▀▀ █▀█ █▀▀ ██▄ █▀▄
 
-#output * bg /home/ja/Pictures/wallpaper/emerge.png fill
-output * bg $(find $wallpapers_path -type f | shuf -n 1) fill
+output * bg /home/ja/Pictures/wallpapers/emerge.png fill
+#output * bg $(find $wallpapers_path -type f | shuf -n 1) fill
 
 
 #windows borders
 gaps inner 10
-gaps outer 8
+gaps outer 2
 #smart_gaps on
 default_border pixel 2
 default_floating_border normal
@@ -128,6 +153,7 @@ hide_edge_borders smart
 #smart_borders on
 focus_follows_mouse no
 floating_modifier $mod normal
+
 #font Cascadia Mono 15
 # 
 #font
@@ -135,10 +161,10 @@ floating_modifier $mod normal
 
 ##Idle configuration
 #
-exec swayidle -w \
-         timeout 300 'swaylock -f -c 000000' \
-         timeout 600 'swaymsg "output * dpms off"' resume 'swaymsg "output * dpms on"' \
-         before-sleep 'swaylock -f -c 000000' \
+#exec swayidle -w \
+#         timeout 300 'swaylock -f -c 000000' \
+#         timeout 600 'swaymsg "output * dpms off"' resume 'swaymsg "output * dpms on"' \
+#         before-sleep 'swaylock -f -c 000000' \
 
 # This will lock your screen after 300 seconds of inactivity, then turn off
 # your displays after another 300 seconds, and turn your screens back on when
@@ -234,35 +260,20 @@ bindsym $mod+Shift+minus move scratchpad
 # If there are multiple scratchpad windows, this command cycles through them.
 bindsym $mod+minus scratchpad show
 
-##█░█ █▀█ ▀█▀ █▄▀ █▀▀ █▄█ █▀
-##█▀█ █▄█ ░█░ █░█ ██▄ ░█░ ▄█
-# Bind media keys on a keyboard to control volume and playback (using wireplumber and pipewire
-bindsym XF86AudioRaiseVolume exec wpctl set-volume @DEFAULT_AUDIO_SINK@ 2%+
-bindsym XF86AudioLowerVolume exec wpctl set-volume @DEFAULT_AUDIO_SINK@ 2%-
-bindsym XF86AudioMute exec wpctl set-mute @DEFAULT_SINK@ toggle
-bindsym Control+XF86AudioMute exec wpctl set-mute @DEFAULT_SOURCE@ toggle
 
-#bindsym XF86AudioPlay exec playerctl play-pause
-#bindsym XF86AudioNext exec playerctl next
-#bindsym XF86AudioPrev exec playerctl previous
-
-bindsym XF86MonBrightnessDown exec brightnessctl set 10%-
-bindsym XF86MonBrightnessUp exec brightnessctl set 10%+
-
-## touchpad disable enable ###
-bindsym XF86TouchpadToggle input type:touchpad events toggle enabled disabled 
-
-##toggle airplane mode Fn+F12 key
-bindsym XF86Rfkill exec ~/.config/sway/exec/airplane-mode.sh
 
 ##█▀ █▀▀ █▀█ █▀▀ █▀▀ █▄░█ █▀ █░█ █▀█ ▀█▀
 ##▄█ █▄▄ █▀▄ ██▄ ██▄ █░▀█ ▄█ █▀█ █▄█ ░█░
 #screenshot with slurp
 # Take a screenshot with all output and save it into screenshots
-bindsym $mod+F6 exec grim -t jpeg ~/Pictures/sway_screenshots/$(date +%Y-%m-%d_%H-%m-%s).jpg
+#bindsym $mod+F6 exec grim -t jpeg ~/Pictures/sway_screenshots/$(date +%Y-%m-%d_%H-%m-%s).jpg
+bindsym $mod+F6 exec '~/.config/sway/exec/screenshot --now'
+
 
 # Take a Screenshot with the region select
-bindsym $mod+Shift+F6 exec grim -t jpeg -g "$(slurp)" ~/Pictures/sway_screenshots/$(date +%Y-%m-%d_%H-%m-%s).jpg
+#bindsym $mod+Shift+F6 exec grim -t jpeg -g "$(slurp)" ~/Pictures/sway_screenshots/$(date +%Y-%m-%d_%H-%m-%s).jpg
+bindsym $mod+Shift+F6 exec '~/.config/sway/exec/screenshot --area'
+
 
 # Resizing containers:
 #
@@ -294,10 +305,19 @@ bindsym $mod+r mode "resize"
 
 for_window [class="vlc"] floating enable
 for_window [class="vlc"] move absolute center
-for_window [class="sway-img"] floating enable
-for_window [class="sway-img"] move absolute center
-for_window [app_id="coretime"] floating enable
-for_window [app_id="coretime"] move absolute center
+#for_window [class="sway-img"] floating enable
+#for_window [class="sway-img"] move absolute center
+#for_window [app_id="sway-img"] floating enable
+#for_window [app_id="sway-img"] move absolute center
+for_window [class="sway-img"] {
+  floating enable
+  move absolute center
+  resize set 1200 800
+}
+
+#for_window [app_id="coretime"] floating enable
+#for_window [app_id="coretime"] move absolute center
+
 #for_window [class="MuPDF"] floating enable
 #for_window [app_id="pavucontrol"] floating enable
 #for_window [app_id="blueman-manager"] floating enable
@@ -306,16 +326,13 @@ for_window [class = "foot"] floating enable
 ## sticky enable
 ##  move position 78ppt 65ppt
 ##}
-##for_window [class="sway-img"] {
-##  floating enable
-##  move absolute center
-##  resize set 1200 800
-##}
+
 ##for_window [app_id="coretime"] {
 ##  floating enable
 ##  move absolute center
 ##  resize set 1200 800
 ##}
+
 #waybar
 bar {
 	swaybar_command waybar
@@ -324,15 +341,19 @@ bar {
 
 assign [app_id="thunderbird"] → $ws1
 assign [app_id="firefox"] → $ws2
+for_window [app_id="firefox"] focus
+
 assign [app_id="microsoft-edge-stable"] → $ws2
 assign [class="microsoft-edge-stable"] → $ws2
 assign [app_id="thunar"] → $ws3
-for_window [app_id="Thunar"] focus
+for_window [app_id="thunar"] focus
+
 assign [app_id="obs"] → $ws4
-assign [app_id="steam"] → $ws5
-assign [class="steam"] → $ws5
+assign [app_id="Steam"] → $ws5
+assign [class="Steam"] → $ws5
 assign [app_id="lutris"] → $ws5
 assign [app_id="virt-manager"] → $ws6
+assign [class="discord"] → $ws8
 assign [app_id="audacious"] → $ws9
 assign [app_id="easyeffects"] → $ws9
 
@@ -340,14 +361,15 @@ assign [app_id="easyeffects"] → $ws9
 ##░░█░░ █▀▀█ █▀▀ █░▀░█ █▀▀ ▀▀█ 
 ##░░▀░░ ▀░░▀ ▀▀▀ ▀░░░▀ ▀▀▀ ▀▀▀
 
-set $gnome-schema org.gnome.desktop.interface
-exec_always {
-    gsettings set $gnome-schema gtk-theme 'Nordic-standard-buttons-v40'
-    gsettings set $gnome-schema icon-theme 'Shiny-Dark-Icons'
-    //gsettings set $gnome-schema cursor-theme 'cursor theme name'
-    gsettings set $gnome-schema font-name 'CascadiaMonoPLItalic 14'
-    //gsettings set org.gnome.desktop.interface text-scaling-factor '1'
-}
+exec_always ~/.config/sway/exec/gtkthemes
+#set $gnome-schema org.gnome.desktop.interface
+#exec_always {
+#    gsettings set $gnome-schema gtk-theme 'Nordic-standard-buttons-v40'
+#    gsettings set $gnome-schema icon-theme 'Shiny-Dark-Icons'
+#    gsettings set $gnome-schema cursor-theme 'Bibata-Modern-Ice 22'
+#    gsettings set $gnome-schema font-name 'CascadiaMonoPLItalic 14'
+#    //gsettings set org.gnome.desktop.interface text-scaling-factor '1'
+#}
 
 ##█▀▀█ █░░█ ▀▀█▀▀ █▀▀█ █▀▀ ▀▀█▀▀ █▀▀█ █▀▀█ ▀▀█▀▀ 
 ##█▄▄█ █░░█ ░░█░░ █░░█ ▀▀█ ░░█░░ █▄▄█ █▄▄▀ ░░█░░ 
@@ -362,16 +384,22 @@ exec /usr/libexec/polkit-gnome-authentication-agent-1 &
 exec mako &
 exec --no-startup-id 'blueman-applet'
 exec --no-startup-id 'nm-applet --indicator'
-exec ~/.config/autostart/apparmor-notify.desktop &
+exec_always --no-startup-id autotiling
+#exec ~/.config/autostart/apparmor-notify.desktop &
+exec aa-notify -p -s 1 -w 60 -f /var/log/audit/audit.log
+
 exec rog-control-center &
-#autotiling
-exec_always autotiling
+
 #pipewire
-exec gentoo-pipewire-launcher
+
+exec_always gentoo-pipewire-launcher &
+
 exec --nostartup-id /usr/libexec/xdg-desktop-portal-wlr -r
+
 #include colorscheme 
 #xwayland enable
 
 exec ~/.config/sway/exec/variables.sh
-#exec ~/.config/sway/exec/touchpad.sh
+exec ~/.config/sway/exec/touchpad.sh
+
 #include /etc/sway/config
