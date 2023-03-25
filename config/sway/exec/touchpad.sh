@@ -1,4 +1,5 @@
 #!/bin/sh
+#when external mouse is inserted, touchpad will be automatically disabled and same when mouse is removed
 
 mouse="*.*Mouse"
 touchpad="*.*Touchpad"
